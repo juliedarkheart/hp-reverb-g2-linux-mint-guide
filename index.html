@@ -34,6 +34,7 @@ sudo apt full-upgrade
 sudo apt install \
   monado-service \
   libopenxr-loader1 \
+  libopenxr-utils \
   xr-hardware \
   vulkan-tools \
   libvulkan1 \
@@ -46,7 +47,7 @@ sudo udevadm trigger</code></pre></div><p>Unplug and reconnect the headset. Neve
 
 <section id="test"><h2>2. Start and test Monado</h2><p>Try the packaged user service:</p><div class="codebox"><button class="copy">Copy</button><pre><code>systemctl --user enable --now monado.service
 systemctl --user status monado.service</code></pre></div><p>If Mint has no service unit, launch it manually:</p><div class="codebox"><button class="copy">Copy</button><pre><code>monado-service</code></pre></div><p>Leave that terminal open while testing.</p>
-<h3>Test before launching a game</h3><div class="codebox"><button class="copy">Copy</button><pre><code>which hello_xr</code></pre></div><p>If it exists, run:</p><div class="codebox"><button class="copy">Copy</button><pre><code>hello_xr</code></pre></div>
+<h3>Test before launching a game</h3><p><code>hello_xr</code> comes from the OpenXR utilities package. If the command is missing, install it first:</p><div class="codebox"><button class="copy">Copy</button><pre><code>sudo apt install libopenxr-utils</code></pre></div><p>Then confirm it is available:</p><div class="codebox"><button class="copy">Copy</button><pre><code>which hello_xr</code></pre></div><p>If that prints a path, run:</p><div class="codebox"><button class="copy">Copy</button><pre><code>hello_xr</code></pre></div><p class="mini">If Mint cannot provide <code>libopenxr-utils</code>, use another OpenXR sample from the Monado or Reverb G2 project instead. The goal is simply to test the headset before adding Steam and Proton.</p>
 <div class="callout danger"><b>Physical verification is required.</b> A successful Vulkan message or reported frame rate does not prove that the G2 is showing an image. Put the headset on and check both eyes, head rotation, positional movement, audio, and controllers.</div>
 <h3>First milestone</h3><div class="checklist" id="checks"><label><input type="checkbox"> Both displays show an image</label><label><input type="checkbox"> Head rotation moves the view</label><label><input type="checkbox"> Moving my head changes position, if 6-DoF is enabled</label><label><input type="checkbox"> Headset audio appears in Mint’s sound settings</label><label><input type="checkbox"> Controllers are paired and visible</label></div></section>
 
